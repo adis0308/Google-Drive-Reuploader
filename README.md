@@ -1,5 +1,5 @@
 # Tutorial Hardsubbed + Reupload ke Google Drive
-1. Buat refresh token dan simpan ke dalam file refrest_token.txt yang berguna untuk membuat access token;
+1. Buat refresh token dan simpan ke dalam file refresh_token.txt yang berguna untuk membuat access token;
 2. Masukkan nama folder tempat menyimpan file batch/video yang akan didownload dan link Google Drive sumber pada file data.txt;
 3. Jalankan file python melalui terminal dengan perintah ```python main.py``` atau jika ingin menjalankannya di latar belakang bisa menggunakan perintah ```nohup main.py > output.log 2>&1 &```.
 
