@@ -22,8 +22,6 @@ refresh_token_file = "refresh_token.txt"
 access_token_file = "access_token.json"
 upload_max_retries = 15
 upload_retry_delay = 5
-ffprobe_path = os.path.join(current_dir, "ffprobe")
-ffmpeg_path = os.path.join(current_dir, "ffmpeg")
 ffmpeg_threads = '0'
 video_extensions = ('.mp4', '.mkv')  # Tambahkan ekstensi lain jika perlu
 data_file = "data.txt"
@@ -139,7 +137,7 @@ def remove_words(text, words_to_remove):
 # Fungsi untuk mengecek subtitle pada video dengan FFmpeg
 def has_subtitle(input_video_path):
     input_path = os.path.join(current_dir, input_video_path)
-    command = [ffprobe_path, "-i", input_path]
+    command = ["ffprobe", "-i", input_path]
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
     # Mencari 'Stream #x:x' dengan 'Subtitle' di output FFmpeg
@@ -151,7 +149,7 @@ def create_hardsub_video(input_video_path, output_video_path):
     subtitle_path = os.path.join(current_dir, *video_input_path)
     input_path = os.path.join(current_dir, input_video_path)
     output_path = os.path.join(current_dir, output_video_path)
-    command = [ffmpeg_path, '-hide_banner', "-threads", ffmpeg_threads, "-i", input_path, "-threads", ffmpeg_threads, "-vf", "subtitles='{}'".format(subtitle_path), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-preset', 'fast', '-c:a', 'copy', '-movflags', '+faststart', '-sn', '-map_metadata', '-1', '-map_chapters', '-1', output_path]
+    command = ['ffmpeg', '-hide_banner', "-threads", ffmpeg_threads, "-i", input_path, "-threads", ffmpeg_threads, "-vf", "subtitles='{}'".format(subtitle_path), '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-preset', 'fast', '-c:a', 'copy', '-movflags', '+faststart', '-sn', '-map_metadata', '-1', '-map_chapters', '-1', output_path]
     subprocess.run(command)
 
 # Fungsi untuk membuat folder pada Google Drive
